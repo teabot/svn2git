@@ -1,0 +1,5 @@
+Uses:
+  https://github.com/nothingmuch/git-svn-abandon
+
+Usage:
+  svn2git svn+ssh://svn.myhost.com/project gite@github.com:teabot/project.git
