@@ -1,14 +1,14 @@
 #!/bin/sh
 
-SVN_URL=$0
-GIT_URL=$1
+SVN_URL=$1
+GIT_URL=$2
 SVN_NAME=${SVN_URL##*/}
 GIT_NAME=${GIT_URL##*/}
 
 mkdir .svn2git-gitclone
 cd .svn2git-gitclone
 
-echo 'Fetching $SVN_NAME from $SVN_URL'
+echo 'Fetching from $SVN_URL'
 git svn clone --trunk=trunk --branches=branches --tags=tags --prefix=svn/ --no-metadata $SVN_URL
 
 echo 'Transforming local git repository $GIT_NAME'
