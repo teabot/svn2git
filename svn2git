@@ -24,6 +24,15 @@ git checkout $LATEST_RELEASE_TAG
 git branch release
 git checkout master
 
+echo ".classpath" > .gitignore
+echo "target" >> .gitignore
+echo ".settings" >> .gitignore
+echo ".project" >> .gitignore
+echo ".DS_Store" >> .gitignore
+
+git add .gitignore
+git commit -m "Default gitignore for eclipse/java project"
+
 git remote add origin $GIT_URL
 git push origin --all --set-upstream
 git push origin --tags
