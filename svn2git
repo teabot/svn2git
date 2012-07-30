@@ -9,7 +9,6 @@ GIT_NAME=${GIT_URL##*/}
 
 echo Fetching from ${SVN_URL}
 git svn clone --trunk=trunk --branches=branches --tags=tags --prefix=svn/ --no-metadata $SVN_URL
-read
 
 echo Transforming local git repository $GIT_NAME
 cd $SVN_NAME
@@ -20,22 +19,18 @@ git-svn-abandon-cleanup
 # find latest release tag
 LATEST_RELEASE_TAG=`git tag | sort -r | head -1`
 echo Creating release branch with tag $LATEST_RELEASE_TAG
-read
 
 git checkout $LATEST_RELEASE_TAG
 git branch release
 git checkout master
-
-read
 
 git remote add origin $GIT_URL
 git push origin --all --set-upstream
 git push origin --tags
 
 cd ..
+chmod -R u+w $SVN_NAME
 rm -r $SVN_NAME
-
-read 
 
 echo Marking $GIT_NAME as migrated
 svn co $SVN_URL
@@ -44,6 +39,7 @@ mkdir '_MIGRATED TO GIT'
 svn add '_MIGRATED TO GIT'
 svn ci -m "Migrated to Git"
 cd ..
+chmod -R u+w $SVN_NAME
 rm -r $SVN_NAME
 
 echo 'Done'
