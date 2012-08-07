@@ -24,11 +24,25 @@ git checkout $LATEST_RELEASE_TAG
 git branch release
 git checkout master
 
-echo ".classpath" > .gitignore
-echo "target" >> .gitignore
-echo ".settings" >> .gitignore
-echo ".project" >> .gitignore
-echo ".DS_Store" >> .gitignore
+cat > .gitignore << EOF
+# Eclipse files
+.classpath
+.settings
+.project
+.springBeans
+
+# Netbeans files
+nbactions.xml
+
+# Maven target folder
+target/
+
+# Any left over .svn folders
+.svn/
+
+# MAC stuff
+.DS_Store
+EOF
 
 git add .gitignore
 git commit -m "Default gitignore for eclipse/java project"
